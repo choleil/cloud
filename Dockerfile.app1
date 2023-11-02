@@ -1,0 +1,21 @@
+# Utilisez une image de base appropriée pour Python
+FROM python:3.10
+
+# Définissez le répertoire de travail dans le conteneur
+WORKDIR /app
+
+# Copiez d'abord le fichier requirements.txt pour éviter l'erreur
+COPY requirements.txt /app/
+
+# Installez les dépendances de votre application Python
+RUN pip install -r requirements.txt
+
+# Copiez tout le contenu du répertoire "app" de votre projet dans le conteneur
+COPY app/ /app/
+
+# Exposez le port sur lequel votre application Python écoute
+EXPOSE 8000
+
+# Commande pour exécuter votre application
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+
